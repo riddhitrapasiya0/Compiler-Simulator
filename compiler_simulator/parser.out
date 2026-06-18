@@ -1,0 +1,287 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> statement
+Rule 1     statement -> ID ASSIGN expression SEMICOLON
+Rule 2     expression -> expression PLUS expression
+Rule 3     expression -> expression MINUS expression
+Rule 4     expression -> expression MULT expression
+Rule 5     expression -> expression DIV expression
+Rule 6     expression -> NUMBER
+Rule 7     expression -> ID
+
+Terminals, with rules where they appear
+
+ASSIGN               : 1
+DIV                  : 5
+ID                   : 1 7
+MINUS                : 3
+MULT                 : 4
+NUMBER               : 6
+PLUS                 : 2
+SEMICOLON            : 1
+error                : 
+
+Nonterminals, with rules where they appear
+
+expression           : 1 2 2 3 3 4 4 5 5
+statement            : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . statement
+    (1) statement -> . ID ASSIGN expression SEMICOLON
+
+    ID              shift and go to state 2
+
+    statement                      shift and go to state 1
+
+state 1
+
+    (0) S' -> statement .
+
+
+
+state 2
+
+    (1) statement -> ID . ASSIGN expression SEMICOLON
+
+    ASSIGN          shift and go to state 3
+
+
+state 3
+
+    (1) statement -> ID ASSIGN . expression SEMICOLON
+    (2) expression -> . expression PLUS expression
+    (3) expression -> . expression MINUS expression
+    (4) expression -> . expression MULT expression
+    (5) expression -> . expression DIV expression
+    (6) expression -> . NUMBER
+    (7) expression -> . ID
+
+    NUMBER          shift and go to state 6
+    ID              shift and go to state 4
+
+    expression                     shift and go to state 5
+
+state 4
+
+    (7) expression -> ID .
+
+    SEMICOLON       reduce using rule 7 (expression -> ID .)
+    PLUS            reduce using rule 7 (expression -> ID .)
+    MINUS           reduce using rule 7 (expression -> ID .)
+    MULT            reduce using rule 7 (expression -> ID .)
+    DIV             reduce using rule 7 (expression -> ID .)
+
+
+state 5
+
+    (1) statement -> ID ASSIGN expression . SEMICOLON
+    (2) expression -> expression . PLUS expression
+    (3) expression -> expression . MINUS expression
+    (4) expression -> expression . MULT expression
+    (5) expression -> expression . DIV expression
+
+    SEMICOLON       shift and go to state 7
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    MULT            shift and go to state 10
+    DIV             shift and go to state 11
+
+
+state 6
+
+    (6) expression -> NUMBER .
+
+    SEMICOLON       reduce using rule 6 (expression -> NUMBER .)
+    PLUS            reduce using rule 6 (expression -> NUMBER .)
+    MINUS           reduce using rule 6 (expression -> NUMBER .)
+    MULT            reduce using rule 6 (expression -> NUMBER .)
+    DIV             reduce using rule 6 (expression -> NUMBER .)
+
+
+state 7
+
+    (1) statement -> ID ASSIGN expression SEMICOLON .
+
+    $end            reduce using rule 1 (statement -> ID ASSIGN expression SEMICOLON .)
+
+
+state 8
+
+    (2) expression -> expression PLUS . expression
+    (2) expression -> . expression PLUS expression
+    (3) expression -> . expression MINUS expression
+    (4) expression -> . expression MULT expression
+    (5) expression -> . expression DIV expression
+    (6) expression -> . NUMBER
+    (7) expression -> . ID
+
+    NUMBER          shift and go to state 6
+    ID              shift and go to state 4
+
+    expression                     shift and go to state 12
+
+state 9
+
+    (3) expression -> expression MINUS . expression
+    (2) expression -> . expression PLUS expression
+    (3) expression -> . expression MINUS expression
+    (4) expression -> . expression MULT expression
+    (5) expression -> . expression DIV expression
+    (6) expression -> . NUMBER
+    (7) expression -> . ID
+
+    NUMBER          shift and go to state 6
+    ID              shift and go to state 4
+
+    expression                     shift and go to state 13
+
+state 10
+
+    (4) expression -> expression MULT . expression
+    (2) expression -> . expression PLUS expression
+    (3) expression -> . expression MINUS expression
+    (4) expression -> . expression MULT expression
+    (5) expression -> . expression DIV expression
+    (6) expression -> . NUMBER
+    (7) expression -> . ID
+
+    NUMBER          shift and go to state 6
+    ID              shift and go to state 4
+
+    expression                     shift and go to state 14
+
+state 11
+
+    (5) expression -> expression DIV . expression
+    (2) expression -> . expression PLUS expression
+    (3) expression -> . expression MINUS expression
+    (4) expression -> . expression MULT expression
+    (5) expression -> . expression DIV expression
+    (6) expression -> . NUMBER
+    (7) expression -> . ID
+
+    NUMBER          shift and go to state 6
+    ID              shift and go to state 4
+
+    expression                     shift and go to state 15
+
+state 12
+
+    (2) expression -> expression PLUS expression .
+    (2) expression -> expression . PLUS expression
+    (3) expression -> expression . MINUS expression
+    (4) expression -> expression . MULT expression
+    (5) expression -> expression . DIV expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for MULT resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+    SEMICOLON       reduce using rule 2 (expression -> expression PLUS expression .)
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    MULT            shift and go to state 10
+    DIV             shift and go to state 11
+
+  ! PLUS            [ reduce using rule 2 (expression -> expression PLUS expression .) ]
+  ! MINUS           [ reduce using rule 2 (expression -> expression PLUS expression .) ]
+  ! MULT            [ reduce using rule 2 (expression -> expression PLUS expression .) ]
+  ! DIV             [ reduce using rule 2 (expression -> expression PLUS expression .) ]
+
+
+state 13
+
+    (3) expression -> expression MINUS expression .
+    (2) expression -> expression . PLUS expression
+    (3) expression -> expression . MINUS expression
+    (4) expression -> expression . MULT expression
+    (5) expression -> expression . DIV expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for MULT resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+    SEMICOLON       reduce using rule 3 (expression -> expression MINUS expression .)
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    MULT            shift and go to state 10
+    DIV             shift and go to state 11
+
+  ! PLUS            [ reduce using rule 3 (expression -> expression MINUS expression .) ]
+  ! MINUS           [ reduce using rule 3 (expression -> expression MINUS expression .) ]
+  ! MULT            [ reduce using rule 3 (expression -> expression MINUS expression .) ]
+  ! DIV             [ reduce using rule 3 (expression -> expression MINUS expression .) ]
+
+
+state 14
+
+    (4) expression -> expression MULT expression .
+    (2) expression -> expression . PLUS expression
+    (3) expression -> expression . MINUS expression
+    (4) expression -> expression . MULT expression
+    (5) expression -> expression . DIV expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for MULT resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+    SEMICOLON       reduce using rule 4 (expression -> expression MULT expression .)
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    MULT            shift and go to state 10
+    DIV             shift and go to state 11
+
+  ! PLUS            [ reduce using rule 4 (expression -> expression MULT expression .) ]
+  ! MINUS           [ reduce using rule 4 (expression -> expression MULT expression .) ]
+  ! MULT            [ reduce using rule 4 (expression -> expression MULT expression .) ]
+  ! DIV             [ reduce using rule 4 (expression -> expression MULT expression .) ]
+
+
+state 15
+
+    (5) expression -> expression DIV expression .
+    (2) expression -> expression . PLUS expression
+    (3) expression -> expression . MINUS expression
+    (4) expression -> expression . MULT expression
+    (5) expression -> expression . DIV expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for MULT resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+    SEMICOLON       reduce using rule 5 (expression -> expression DIV expression .)
+    PLUS            shift and go to state 8
+    MINUS           shift and go to state 9
+    MULT            shift and go to state 10
+    DIV             shift and go to state 11
+
+  ! PLUS            [ reduce using rule 5 (expression -> expression DIV expression .) ]
+  ! MINUS           [ reduce using rule 5 (expression -> expression DIV expression .) ]
+  ! MULT            [ reduce using rule 5 (expression -> expression DIV expression .) ]
+  ! DIV             [ reduce using rule 5 (expression -> expression DIV expression .) ]
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for PLUS in state 12 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 12 resolved as shift
+WARNING: shift/reduce conflict for MULT in state 12 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 12 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 13 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 13 resolved as shift
+WARNING: shift/reduce conflict for MULT in state 13 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 13 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 14 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 14 resolved as shift
+WARNING: shift/reduce conflict for MULT in state 14 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 14 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 15 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 15 resolved as shift
+WARNING: shift/reduce conflict for MULT in state 15 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 15 resolved as shift

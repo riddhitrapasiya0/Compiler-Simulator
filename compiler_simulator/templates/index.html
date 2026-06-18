@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Compiler Phase Simulator</title>
+
+<style>
+
+body{
+font-family:Arial;
+text-align:center;
+background:linear-gradient(135deg,#667eea,#764ba2);
+color:white;
+margin:0;
+padding:20px;
+}
+
+h1{
+font-size:40px;
+margin-bottom:20px;
+}
+
+textarea{
+width:70%;
+height:120px;
+font-size:18px;
+padding:10px;
+border-radius:10px;
+border:none;
+outline:none;
+}
+
+button{
+padding:10px 25px;
+font-size:18px;
+border:none;
+border-radius:8px;
+background:#ff9800;
+color:white;
+cursor:pointer;
+}
+
+button:hover{
+background:#ff5722;
+}
+
+table{
+margin:auto;
+border-collapse:collapse;
+width:60%;
+background:white;
+color:black;
+border-radius:10px;
+overflow:hidden;
+}
+
+table,th,td{
+border:1px solid #ddd;
+padding:10px;
+}
+
+th{
+background:#333;
+color:white;
+}
+
+.node{
+display:inline-block;
+padding:8px 15px;
+border-radius:8px;
+margin:5px;
+background:white;
+color:black;
+font-weight:bold;
+}
+
+.children{
+display:flex;
+justify-content:center;
+}
+
+/* TOKEN COLORS */
+
+.IDENTIFIER{
+color:blue;
+font-weight:bold;
+}
+
+.OPERATOR{
+color:red;
+font-weight:bold;
+}
+
+.NUMBER{
+color:green;
+font-weight:bold;
+}
+
+.SEMICOLON{
+color:orange;
+font-weight:bold;
+}
+
+.section{
+background:white;
+color:black;
+padding:20px;
+margin:20px auto;
+border-radius:12px;
+width:75%;
+box-shadow:0px 5px 15px rgba(0,0,0,0.2);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>🚀 Compiler Phase Simulator</h1>
+
+<form method="POST">
+
+<textarea name="code" placeholder="Enter code here">{{code}}</textarea>
+
+<br><br>
+
+<button type="submit">Run Compiler</button>
+
+</form>
+
+<div class="section">
+
+<h2>Lexical Analysis</h2>
+
+<table>
+
+<tr>
+<th>Token Type</th>
+<th>Value</th>
+</tr>
+
+{% for t in tokens %}
+
+<tr class="{{t[0]}}">
+<td>{{t[0]}}</td>
+<td>{{t[1]}}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+<div class="section">
+
+<h2>Syntax Analysis</h2>
+
+<p>{{syntax}}</p>
+
+</div>
+
+<div class="section">
+
+<h2>Semantic Analysis</h2>
+
+<p>{{semantic}}</p>
+
+</div>
+
+<div class="section">
+
+<h2>3 Address Code</h2>
+
+<ul>
+
+{% for i in tac %}
+
+<li>{{i}}</li>
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+<div class="section">
+
+<h2>Parse Trees</h2>
+
+{% for tree in trees %}
+
+<div>
+
+<div class="node">{{tree.result}}</div>
+
+<div>|</div>
+
+<div class="node">{{tree.operator}}</div>
+
+<div class="children">
+
+<div class="node">{{tree.op1}}</div>
+<div class="node">{{tree.op2}}</div>
+
+</div>
+
+</div>
+
+<br>
+
+{% endfor %}
+
+</div>
+
+</body>
+
+</html>

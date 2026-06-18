@@ -1,0 +1,11 @@
+digraph {
+	"=" [label="="]
+	a [label=a]
+	"+" [label="+"]
+	b [label=b]
+	c [label=c]
+	"=" -> a
+	"=" -> "+"
+	"+" -> b
+	"+" -> c
+}
